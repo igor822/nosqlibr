@@ -1,0 +1,26 @@
+{
+	"name" : "igor822/nosql-conn",
+	"description" : "Simple lib to manipulate data with nosql databases",
+	"type" : "library",
+	"authors" : [
+		{
+			"name" : "Igor Carvalho",
+			"email" : "igor822@gmail.com",
+			"homepage" : "http://igorcarvalho.com",
+			"role" : "Developer"
+		}
+	],
+	"license" : "MIT",
+	"require" : {
+		"php" : ">= 5.3.0"
+	},
+	"version" : "0.0.1",
+	"autoload" : {
+		"psr-0" : {
+			"NoSQLConn\\" : "lib/"
+		},
+		"classmap" : [
+			"lib/"
+		]
+	}
+}
