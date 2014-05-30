@@ -1,5 +1,5 @@
 <?php 
-namespace NoSqlConn;
+namespace NoSqlibr;
 
 interface ConnectorInterface {
 

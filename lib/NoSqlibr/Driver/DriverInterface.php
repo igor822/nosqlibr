@@ -1,5 +1,5 @@
 <?php 
-namespace NoSqlConn\Driver;
+namespace NoSqlibr\Driver;
 
 interface DriverInterface {
 

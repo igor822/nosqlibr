@@ -1,9 +1,9 @@
 <?php 
-namespace NoSqlConn;
+namespace NoSqlibr;
 
-use NoSqlConn\ConnectorInterface;
+use NoSqlibr\ConnectorInterface;
 
-class NoSqlConn implements ConnectorInterface {
+class NoSqlibr implements ConnectorInterface {
 
 	public function __construct($conn) {
 

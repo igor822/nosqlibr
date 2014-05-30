@@ -1,5 +1,5 @@
 {
-	"name" : "igor822/nosql-conn",
+	"name" : "igor822/nosqlibr",
 	"description" : "Simple lib to manipulate data with nosql databases",
 	"type" : "library",
 	"authors" : [
@@ -17,7 +17,7 @@
 	"version" : "0.0.1",
 	"autoload" : {
 		"psr-0" : {
-			"NoSQLConn\\" : "lib/"
+			"NoSqlibr\\" : "lib/"
 		},
 		"classmap" : [
 			"lib/"
