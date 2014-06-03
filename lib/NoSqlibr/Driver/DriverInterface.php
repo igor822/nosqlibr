@@ -13,4 +13,8 @@ interface DriverInterface {
 
 	public function find($condition = array());
 
+	public function selectDB($name);
+
+	public function getConnections();
+
 }
