@@ -108,6 +108,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
 	 * @depends testCreateCollectionAndValidateIfHasCreated
 	 */
 	public function testInsertValuesIntoCollection(\NoSqlibr\Driver\Mongo $db) {
+		return $db;
 		$this->assertNotEmpty($db);
 
 		$a = $db->insert(array('x' => mt_rand(10000, 900000), 'y' => md5(mt_rand(1000, 9000))));
@@ -118,5 +119,30 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNotEmpty($db->find(array('test' => 'blabla')));
 
+		return $db;
+	}
+
+	/**
+	 * @depends testInsertValuesIntoCollection 
+	 */
+	public function testUpdateValuesIntoCollection(\NoSqlibr\Driver\DriverInterface $db) {
+		$this->assertNotEmpty($db);
+
+		$rs = $db->update(array('_id' => \NoSqlibr\Driver\Id::convert('538de0b573a768bc788b4567')), array('x' => '0011', 'y' => 'aaaaaaaa', 'test' => 'lorem ipsum blabla'));
+		$this->assertTrue($rs);
+
+		return $db;
+	}
+
+	/**
+	 * @depends testInsertValuesIntoCollection 
+	 */
+	public function testRemoveValuesOfCollection(\NoSqlibr\Driver\DriverInterface $db) {
+		$this->assertNotEmpty($db);
+
+		$criteria = array('_id' => \NoSqlibr\Driver\Id::convert('538de0b573a768bc788b4567'));
+
+		$rs = $db->remove($criteria);
+		$this->assertTrue($rs);
 	}
 }
