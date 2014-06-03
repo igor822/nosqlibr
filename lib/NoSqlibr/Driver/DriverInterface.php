@@ -5,11 +5,11 @@ interface DriverInterface {
 
 	public function connect();
 	
-	public function insert($data);
+	public function insert($data, $options = array());
 
-	public function update($data, $condition = array());
+	public function update($criteria = array(), $newObject = array(), $options = array());
 
-	public function remove($condition);
+	public function remove($condition = array(), $options = array());
 
 	public function find($condition = array());
 
