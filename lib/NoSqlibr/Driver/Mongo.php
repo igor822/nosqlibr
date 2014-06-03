@@ -70,8 +70,9 @@ class Mongo implements DriverInterface {
 	 *
 	 * @see http://www.php.net/manual/pt_BR/mongocollection.remove.php
 	 */
-	public function remove($condition = array(), $options = array()) {
-
+	public function remove($criteria = array(), $options = array()) {
+		$rs = $this->getCollection()->remove($criteria, $options);
+		return $rs;
 	}
 
 	public function find($condition = array()){
