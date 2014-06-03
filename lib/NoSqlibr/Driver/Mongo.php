@@ -53,11 +53,24 @@ class Mongo implements DriverInterface {
 		return $rs;
 	}
 
-	public function update($data, $condition = array()){
+	public function update($criteria = array(), $newObject = array(), $options = array()) {
+		if (empty($this->collection)) throw new NoSqlException\CollectionException('Please select an collection to update your values');
 
+		if (is_array($criteria) && !empty($newObject)) {
+			$rs = $this->getCollection()->update($criteria, $newObject, $options);
+		} else {
+			throw new \Exception('You must set and new object to update');
+		}
+
+		return $rs;
 	}
 
-	public function remove($condition){
+	/**
+	 * Method to remove data of collections
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongocollection.remove.php
+	 */
+	public function remove($condition = array(), $options = array()) {
 
 	}
 
@@ -65,12 +78,22 @@ class Mongo implements DriverInterface {
 		return $this->collection->find($condition);
 	}
 
+	/**
+	 * Method to select what DB will be used
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongoclient.selectdb.php
+	 */
 	public function selectDB($name) {
 		if (empty($this->driver)) $this->connect();
 		$this->db = $this->driver->selectDB($name);
 		return $this;
 	}
 
+	/**
+	 * Method to get current active connections
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongoclient.getconnections.php
+	 */ 
 	public function getConnections() {
 		if (!empty($this->driver)) return $this->driver->getConnections();
 	}
@@ -80,15 +103,30 @@ class Mongo implements DriverInterface {
 		else throw new \Exception('DB is not selected');
 	}
 
+	/**
+	 * Method to list all collections into current db 
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongodb.listcollections.php
+	 */
 	public function listCollections($incl = false) {
 		return $this->getDB()->listCollections($incl);
 	}
 
+	/**
+	 * Method to select what collection will be used 
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongoclient.selectcollection.php
+	 */
 	public function selectCollection($name) {
 		if (!empty($this->collection)) return $this->collection;
 		return $this->collection = $this->getDB()->selectCollection($name);
 	}
 
+	/**
+	 * Method to create a new collection into database
+	 *
+	 * @see http://www.php.net/manual/pt_BR/mongodb.createcollection.php
+	 */
 	public function createCollection($name, $options = array()) {
 		if (!in_array($name, $this->getDB()->getCollectionNames())) {
 			$defaultOptions = array('capped' => false, 'size' => '10*1024', 'max' => 10);
