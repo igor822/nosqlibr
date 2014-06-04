@@ -53,6 +53,15 @@ class Mongo implements DriverInterface {
 		return $rs;
 	}
 
+	/**
+	 * Method to update document by setting a new documento to object
+	 * 
+	 * @param $criteria Descriptin of the objects to update
+	 * @param $newObject The object with which to update the matching records
+	 * @access public
+	 * @throws NoSqlException\CollectionException
+	 * @throws \Exception
+	 */
 	public function update($criteria = array(), $newObject = array(), $options = array()) {
 		if (empty($this->collection)) throw new NoSqlException\CollectionException('Please select an collection to update your values');
 
@@ -76,7 +85,7 @@ class Mongo implements DriverInterface {
 	}
 
 	public function find($condition = array()){
-		return $this->collection->find($condition);
+		return $this->getCollection()->find($condition);
 	}
 
 	/**
@@ -139,6 +148,7 @@ class Mongo implements DriverInterface {
 	}
 
 	public function getCollection() {
+		if (empty($this->collection)) throw new \Exception('You must connecto to database todo something');
 		return $this->collection;
 	}
 
