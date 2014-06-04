@@ -1,5 +1,5 @@
 <?php 
-namespace NoSqlibr\Tests;
+namespace NoSqlibr\Tests\Driver;
 
 require_once '../../../vendor/autoload.php';
 
@@ -144,5 +144,28 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
 
 		$rs = $db->remove($criteria);
 		$this->assertTrue($rs);
+	}
+
+	/**
+	 * @expectedException Exception
+	 */
+	public function testSelectWithoutUseDB() {
+		$data = array(
+			'driver' => 'mongo',
+			'user' => 'admin',
+			'pass' => 'admin',
+			'host' => 'localhost',
+			'port' => '27017'
+		);
+
+		$colName = 'any_data';
+
+		$driver = new \NoSqlibr\Driver\Driver($data);
+		$driver->getDriver()->find();
+
+		$criteria = array('_id' => \NoSqlibr\Driver\Id::convert('538de0b573a768bc788b4567'));
+
+		$rs = $driver->getDriver()->getDb->remove($criteria);
+
 	}
 }
