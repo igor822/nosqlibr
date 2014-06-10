@@ -72,4 +72,11 @@ class NoSqlibr extends \PHPUnit_Framework_TestCase {
 		$this->assertCount(2, $noSql->connectTo('test.users')->find()->limit(2));
 	}
 
+	public function testInsertCreateCollection() {
+		$noSql = new \NoSqlibr\NoSqlibr($this->conn);
+
+		$this->assertInstanceOf('MongoCollection', $noSql->connectTo('test.test_col'));
+		$this->assertEquals(true, $noSql->connectTo('test.test_col')->insert(array('test' => 1)));
+	}
+
 }

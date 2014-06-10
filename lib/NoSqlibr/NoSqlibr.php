@@ -89,8 +89,11 @@ class NoSqlibr implements ConnectorInterface {
 		if ($name === '') return $this->collections;
 		$this->collections[$name] = $this->driver->getDriver()->selectCollection($name);
 		
-		if (!empty($this->collections[$name]->validate()['errmsg'])) 
-			throw new \Exception('You selected an invalid collection');
+		if (!empty($this->collections[$name]->validate()['errmsg'])) {
+			$this->driver->getDriver()->createCollection($name);
+			return $this->getCollection($name);
+			//throw new \Exception('You selected an invalid collection');
+		}
 
 		return $this->collections[$name];
 	}
