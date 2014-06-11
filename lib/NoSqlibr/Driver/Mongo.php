@@ -30,7 +30,9 @@ class Mongo implements DriverInterface {
 	}
 
 	private function dsn() {
-		return 'mongodb://'.$this->data['user'].':'.$this->data['pass'].'@'.$this->data['host'].':'.$this->data['port'];
+		$dsn_user = '';
+		if (!empty($this->data['user']) && !empty($this->data['pass'])) $dsn_user = $this->data['user'].':'.$this->data['pass'].'@';
+		return 'mongodb://'.$dsn_user.$this->data['host'].':'.$this->data['port'];
 	}
 	
 	/**

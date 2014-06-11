@@ -58,8 +58,8 @@ class NoSqlibr implements ConnectorInterface {
 	 */
 	private function validateDataConnection() {
 		if (empty($this->connection['db']) || 
-			empty($this->connection['user']) || 
-			empty($this->connection['pass']) ||
+			/*empty($this->connection['user']) || 
+			empty($this->connection['pass']) ||*/
 			empty($this->connection['host']) ||
 			empty($this->connection['port'])) 
 			throw new \Exception('You need to set a db to be selected');
