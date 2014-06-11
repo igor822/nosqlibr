@@ -25,7 +25,7 @@ class Mongo implements DriverInterface {
 	}
 	
 	public function connect() {
-		$this->driver = new \Mongo($this->dsn());
+		$this->driver = new \MongoClient($this->dsn());
 		return $this;
 	}
 

@@ -129,7 +129,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
 		$this->assertNotEmpty($db);
 
 		$rs = $db->update(array('_id' => \NoSqlibr\Driver\Id::convert('538de0b573a768bc788b4567')), array('x' => '0011', 'y' => 'aaaaaaaa', 'test' => 'lorem ipsum blabla'));
-		$this->assertTrue($rs);
+		$this->assertEquals(1, $rs['ok']);
 
 		return $db;
 	}
@@ -143,7 +143,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
 		$criteria = array('_id' => \NoSqlibr\Driver\Id::convert('538de0b573a768bc788b4567'));
 
 		$rs = $db->remove($criteria);
-		$this->assertTrue($rs);
+		$this->assertEquals(1, $rs['ok']);
 	}
 
 	/**
